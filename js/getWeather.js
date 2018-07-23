@@ -22,17 +22,19 @@ let celciusTemp = {
 
 fire();
 
-setTimeout(getCurrentWeather, 2000);
-setTimeout(getCityWeather, 2000);
+setTimeout(getCurrentWeather, 1000);
+setTimeout(getCityWeather, 1000);
 
 function getCurrentWeather(){
+
 	//Call navigator.geolocation to get user's current location.
-	navigator.geolocation.getCurrentPosition(function(response) {
-		coordinates.lat = response.coords.latitude;
-		coordinates.long = response.coords.longitude;
+	navigator.geolocation.getCurrentPosition(function (response) {
+		lat = response.coords.latitude;
+		long = response.coords.longitude;
 		
 		//calls the openWeather API.
-		let api = $.get('https://api.openweathermap.org/data/2.5/weather?lat=' + coordinates.lat + '&lon=' + coordinates.long + '&' + 'appid=' + weather_api_id).done(function(){
+		let api = $.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${weather_api_id}`).done(function(){
+
 			//Parses the API's responses and updates the objectes declared above with the the fahrenheit values.
 			celciusTemp.currentTemp = Math.round((api.responseJSON.main.temp - 273.15) * 10) / 10;
 			celciusTemp.minTemp = Math.round((api.responseJSON.main.temp_min - 273.15) * 10) / 10;
@@ -48,22 +50,30 @@ function getCurrentWeather(){
 
 			//Parses through the API's response and update the sunRise. There's additional code to get the hours and the minutes from new Date().		
 			let sunRiseTime = new Date(api.responseJSON.sys.sunrise * 1000);
-			sunRise = sunRiseTime.getHours() + ':' + sunRiseTime.getMinutes() + ' AM';
+			sunRise = `${sunRiseTime.getHours()}:${sunRiseTime.getMinutes()} AM`;
 
 			//Parses through the API's response and update the sunSet. There's additional code to get the hours and the minutes from new Date().
 			let sunSetTime = new Date(api.responseJSON.sys.sunset * 1000);
-			sunSet = sunSetTime.getHours() + ':' + sunSetTime.getMinutes() + ' PM';
+			sunSet = `${sunSetTime.getHours()}:${sunSetTime.getMinutes()} PM`;
+
 		}).done(function(){
+
+			// It checks the whether the widget value is 1 or 0, if the value is 1 then the widgets are displayed
 			displaying()
-			$('#overlay').css('display', 'none')
+
+			// Reomves the loading spinner
+			$('.preloader-background').fadeOut('slow');
+			$('.preloader-wrapper').fadeOut('slow');
 		});
 	});
 };
 
 
-function getCityWeather(city){
+function getCityWeather(city = 'goiania'){
+	
 	//calls the openWeather API.
-	let api = $.get('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&lon=' + '&' + 'appid=' + weather_api_id).done(function(){
+	let api = $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weather_api_id}`).done(function(){
+
 	//Parses the API's responses and updates the objectes declared above with the the fahrenheit values.
 	celciusTemp.currentTemp = Math.round((api.responseJSON.main.temp - 273.15) * 10) / 10;
 	celciusTemp.minTemp = Math.round((api.responseJSON.main.temp_min - 273.15) * 10) / 10;
@@ -79,10 +89,10 @@ function getCityWeather(city){
 
 	//Parses through the API's response and update the sunRise. There's additional code to get the hours and the minutes from new Date().		
 	let sunRiseTime = new Date(api.responseJSON.sys.sunrise * 1000);
-	sunRise = sunRiseTime.getHours() + ':' + sunRiseTime.getMinutes() + ' AM';
+	sunRise = `${sunRiseTime.getHours()}:${sunRiseTime.getMinutes()} AM`;
 
 	//Parses through the API's response and update the sunSet. There's additional code to get the hours and the minutes from new Date().
 	let sunSetTime = new Date(api.responseJSON.sys.sunset * 1000);
-	sunSet = sunSetTime.getHours() + ':' + sunSetTime.getMinutes() + ' PM';
+	sunSet = `${sunSetTime.getHours()}:${sunSetTime.getMinutes()} PM`;
 	})
 };
