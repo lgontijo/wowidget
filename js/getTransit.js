@@ -1,39 +1,15 @@
-let destinationA1;
-let minutesA1;
-let minutesA2;
+// Stores all of the destinations in one global array 
+let destinations = [];
 
-let destinationB2;
-let minutesB1;
-let minutesB2;
-
-let destinationC3;
-let minutesC1;
-let minutesC2;
-
-let destinationD4;
-let minutesD1;
-let minutesD2;
-
-setTimeout(delayTransit, 3000);
+setTimeout(getBartTimes, 1000);
 fire();
-function delayTransit(){
-const bart = "https://api.bart.gov/api/etd.aspx?cmd=etd&orig=POWL&key=" + bart_api_key + "&json=y";
-$.get(bart, function(data){
-  destinationA1 = (data.root.station["0"].etd["0"].destination);
-  minutesA1 = (data.root.station["0"].etd["0"].estimate["0"].minutes);
-  minutesA2 = (data.root.station["0"].etd["0"].estimate[1].minutes);
 
-  destinationB2 = (data.root.station["0"].etd[1].destination);
-  minutesB1 = (data.root.station["0"].etd[1].estimate["0"].minutes);
-  minutesB2 = (data.root.station["0"].etd[1].estimate[1].minutes);
+// Calls the Bart API and returns all of the eta's and whatnot based on the destination entered by the user
+function getBartTimes(bart_station = "POWL"){
+	const bart_url = `https://api.bart.gov/api/etd.aspx?cmd=etd&orig=${bart_station}&key=${bart_api_key}&json=y`;
 
-  destinationC3 = (data.root.station["0"].etd[2].destination);
-  minutesC1 = (data.root.station["0"].etd[2].estimate["0"].minutes);
-  minutesC2 = (data.root.station["0"].etd[2].estimate[1].minutes);
+	$.get(bart_url, function(data){
+		destinations = data.root.station["0"].etd;
+	});
 
-  destinationD4 = (data.root.station["0"].etd[3].destination);
-  minutesD1 = (data.root.station["0"].etd[3].estimate["0"].minutes);
-  minutesD2 = (data.root.station["0"].etd[3].estimate[1].minutes);
-
-});
 };

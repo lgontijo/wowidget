@@ -13,15 +13,23 @@ let transitWidget;
 let none;
 let v;
 
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, {
+      direction: 'left'
+    });
+  });
+
 // Firebase config.
 var config = {
-   apiKey: "AIzaSyCa8FeeJ3G6uinkNO7FnydAaB0FG5ycONY",
-   authDomain: "widgets-3c5e0.firebaseapp.com",
-   databaseURL: "https://widgets-3c5e0.firebaseio.com",
-   projectId: "widgets-3c5e0",
+   apiKey: 'AIzaSyCa8FeeJ3G6uinkNO7FnydAaB0FG5ycONY',
+   authDomain: 'widgets-3c5e0.firebaseapp.com',
+   databaseURL: 'https://widgets-3c5e0.firebaseio.com',
+   projectId: 'widgets-3c5e0',
    storageBucket: "",
-   messagingSenderId: "803871080546"
+   messagingSenderId: '803871080546'
  };
+
  firebase.initializeApp(config);
 
 // Save user's notes when the save button is clicked.
@@ -130,37 +138,46 @@ function addZero(listID){
   if (listID === '#b1'){
     update.update({
       notes_value: 0
-    });
+	});
+
   } else if (listID === '#a1') {
     update.update({
       news_value: 0
-    });
+	});
+
   } else if (listID === '#c1') {
     update.update({
       weather_value: 0
-    });
+	});
+
   } else if (listID === '#d1') {
     update.update({
       spotify_value: 0
-    });
+	});
+
   } else if (listID === '#g1') {
     update.update({
       reminders_value: 0
-    });
+	});
+
   } else if (listID === '#f1') {
     update.update({
       transit_value: 0
-    });
+	});
+
   }
+
 }
 
 // Returns the stored user's input.
 function getUserNotes(){
-  const key = firebase.database();
-  const n = key.ref('notes').on('value', function(results){
-    let noted = results.val();
-    notas = noted.notes;
-});
+	const key = firebase.database();
+
+	const n = key.ref('notes').on('value', function(results){
+		let noted = results.val();
+		notas = noted.notes;
+	});
+	
 }
 
 // This function is responsible for the persistent state of the widgets. It checks the whether the widget value is 1 or 0, if the value is 1 then the widgets are displayed.
@@ -188,7 +205,7 @@ function displaying(){
   }
 }
 
-// This returns the API key value from the data warehouse and assign them to some local variables. This function runs with a setTimeout in all of the other JS files.
+// This returns the API key value from the database and assign them to some local variables. This function runs with a setTimeout in all of the other JS files.
 function fire(){
   const key = firebase.database();
   const bartKey = key.ref('api').on('value', function(results){
