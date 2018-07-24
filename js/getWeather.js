@@ -22,8 +22,8 @@ let celciusTemp = {
 
 fire();
 
-setTimeout(getCurrentWeather, 1000);
-setTimeout(getCityWeather, 1000);
+setTimeout(getCurrentWeather, 3000);
+setTimeout(getCityWeather, 3000);
 
 function getCurrentWeather(){
 

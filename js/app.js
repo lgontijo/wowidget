@@ -13,6 +13,12 @@ let transitWidget;
 let none;
 let v;
 
+$(document).ready(function(){
+    $('.modal').modal();
+  });
+    
+
+
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.fixed-action-btn');
     var instances = M.FloatingActionButton.init(elems, {

@@ -5,7 +5,7 @@ let theNewApiSource = [];
 
 
 // getNews need to wait until fire() runs in order to collect the API key.
-setTimeout(getNews, 1000);
+setTimeout(getNews, 3000);
 
 // Runs the fire() function. This returns the API key value from the database and assign them to some local variables.
 fire();
