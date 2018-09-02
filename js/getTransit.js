@@ -1,7 +1,7 @@
 // Stores all of the destinations in one global array 
 let destinations = [];
 
-setTimeout(getBartTimes, 1000);
+setTimeout(getBartTimes, 3000);
 fire();
 
 // Calls the Bart API and returns all of the eta's and whatnot based on the destination entered by the user

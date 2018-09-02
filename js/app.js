@@ -13,11 +13,23 @@ let transitWidget;
 let none;
 let v;
 
-document.addEventListener('DOMContentLoaded', function() {
+$(document).ready(() => {
+    $('.modal').modal();
+  });
+    
+  $(document).ready(() => {
+	$('.tap-target').tapTarget();
+  });
+
+document.addEventListener('DOMContentLoaded',() => {
     var elems = document.querySelectorAll('.fixed-action-btn');
     var instances = M.FloatingActionButton.init(elems, {
       direction: 'left'
     });
+  });
+
+  $(document).ready(() => {
+	$('select').formSelect();
   });
 
 // Firebase config.
@@ -33,8 +45,8 @@ var config = {
  firebase.initializeApp(config);
 
 // Save user's notes when the save button is clicked.
-function saveNotes() {
-  $('#save').on('click', function(element){
+saveNotes = () => {
+  $('#save').on('click', (element) => {
     element.preventDefault();
     let userInput = $('#type').val();
     const key = firebase.database();
@@ -46,52 +58,52 @@ function saveNotes() {
 }
 
 // The following 6 functions returns the widgets value. Either 1 or 0.
-function getWidgetsValue(){
+getWidgetsValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', function(r){
+  let k = key.ref('state').on('value', (r) => {
     none = r.val();
     notesWidget = none.notes_value;
   });
 }
-function getRemindersValue(){
+getRemindersValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', function(r){
+  let k = key.ref('state').on('value', (r) => {
     none = r.val();
     remindersWidget = none.reminders_value;
   });
 }
-function getSpotifyValue(){
+getSpotifyValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', function(r){
+  let k = key.ref('state').on('value', (r) => {
     none = r.val();
     spotifyWidget = none.spotify_value;
   });
 }
-function getNewsValue(){
+getNewsValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', function(r){
+  let k = key.ref('state').on('value', (r) => {
     none = r.val();
     newsWidget = none.news_value;
   });
 }
-function getWeatherValue(){
+getWeatherValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', function(r){
+  let k = key.ref('state').on('value', (r) => {
     none = r.val();
     weatherWidget = none.weather_value;
 
   });
 }
-function getTransitValue(){
+getTransitValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', function(r){
+  let k = key.ref('state').on('value', (r) => {
     none = r.val();
     transitWidget = none.transit_value;
   });
 }
 
 // This runs all of the funcrtions above as soon as possible.
-$(document).ready(function(){
+$(document).ready(() => {
   getWidgetsValue();
   getRemindersValue();
   getSpotifyValue();
@@ -170,10 +182,10 @@ function addZero(listID){
 }
 
 // Returns the stored user's input.
-function getUserNotes(){
+getUserNotes = () => {
 	const key = firebase.database();
 
-	const n = key.ref('notes').on('value', function(results){
+	const n = key.ref('notes').on('value', (results) => {
 		let noted = results.val();
 		notas = noted.notes;
 	});
@@ -181,7 +193,7 @@ function getUserNotes(){
 }
 
 // This function is responsible for the persistent state of the widgets. It checks the whether the widget value is 1 or 0, if the value is 1 then the widgets are displayed.
-function displaying(){
+displaying = () => {
   if (notesWidget === 1) {
     n();
     sorts();
@@ -206,9 +218,9 @@ function displaying(){
 }
 
 // This returns the API key value from the database and assign them to some local variables. This function runs with a setTimeout in all of the other JS files.
-function fire(){
+fire = () => {
   const key = firebase.database();
-  const bartKey = key.ref('api').on('value', function(results){
+  const bartKey = key.ref('api').on('value', (results) => {
     allKeys = results.val();
     bart_api_key = allKeys.bart_api_key;
     news_api_key = allKeys.news_api_key;
@@ -219,26 +231,26 @@ function fire(){
 };
 
 // This opens the side bar.
-function openNav() {
+openNav = () => {
     $("#mySidenav").css("width", "200px")
 }
 
 // This function hides the side bar.
-function closeNav() {
+closeNav = ()  => {
     $("#mySidenav").css("width", "0")
 }
 
 // This removes the widget from the main view and updates the widgets value to 0.
-function close(xid, divid) {
-  $(xid).on('click', function(){
+close = (xid, divid) => {
+  $(xid).on('click', () => {
     addZero(divid);
     $(divid).remove();
   });
 }
 
 //
-function btn(){
-  $('#new-thing-button').on('click', function(element){
+btn = () => {
+  $('#new-thing-button').on('click', (element) => {
     element.preventDefault();
     let template = `
     <div id='aqui'>
@@ -254,9 +266,9 @@ function update(){
   for (var i = 0; i < theNewApiTitles.length; i++) {
     let newsTemplate = `
     <article class='article'>
-    <a id='a' href='${theNewApiUrls[i]}'</a>
-      <h4 class='title'>${theNewApiTitles[i]}</h4>
-      <p id='source'>-${theNewApiSource[i]}</p>
+    <a id='a' href='${theNewApiUrls[0]}'</a>
+      <h4 class='title'>${theNewApiTitles[0]}</h4>
+      <p id='source'>-${theNewApiSource[0]}</p>
     </article>
     `
     $('#attach').append(newsTemplate);
@@ -308,12 +320,22 @@ function w(){
   close('#x3', '#c1');
 }
 
-function s(){
+function s(type){
+	let url;
+	if (type === 1) {
+		url = 'https://embed.spotify.com/?uri=spotify%3Auser%3Aspotifycharts%3Aplaylist%3A37i9dQZEVXbMDoHDwVN2tF'
+	}
+	if (type === 2) {
+		url = 'https://embed.spotify.com/?uri=spotify%3Auser%3Aspotifycharts%3Aplaylist%3A37i9dQZEVXbLRQDuF5jeBp'
+	}
+	if (type === 3) {
+		url = 'https://embed.spotify.com/?uri=spotify%3Auser%3Aspotifycharts%3Aplaylist%3A37i9dQZEVXbMXbN3EUUhlg'
+	}
   let template = `
   <li id='d1' class="ui-state-default">
     <div class="mydiv">
       <div class="mydivheader">Spotify<span id='x4' class='x' href='#'>x</div>
-      <iframe src="https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXcBWIGoYBM5M" width="400" height="480" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      <iframe src="${url}" width="400" height="480" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
   </li>
   `
@@ -420,3 +442,84 @@ $('.closebtn').on('click', function(element){
   element.preventDefault();
   closeNav();
 });
+
+$('#next').on('click', function(){
+	let picked = $('#which').val()
+	console.log(picked)
+	updateViewer(picked)
+})
+
+function updateViewer(picked) {
+	if (picked == 1){
+		let template = `
+		<form action="#">
+		<p>
+		<label>
+		  <input id="global" type="checkbox" />
+		  <span>Top 50 - Global</span>
+		</label>
+	  </p>
+	  <p>
+	  <p>
+		<label>
+		  <input id="usa" type="checkbox" />
+		  <span>Top 50 - USA</span>
+		</label>
+	  </p>
+	  <p>
+	  <p>
+		<label>
+		  <input id="brasil" type="checkbox" />
+		  <span>Top 50 - Brasil</span>
+		</label>
+	  </p>
+	  <p>
+	  	</form>
+		`;
+		$('#create_widget').append(template);
+		$('#next').css('display', 'none')
+	}
+	 if (picked === 2){
+
+	}
+	 if (picked === 3){
+
+	}
+	 if (picked === 4){
+
+	}
+	 if (picked === 5){
+
+	}
+	if (picked === null) {
+		console.log("Something went wrong");
+	}
+}
+
+
+$('#create').on('click', () => {
+	if (
+		document.getElementById('global').checked
+	) {
+		s(1);
+		sorts();
+  		closeNav();
+  		addOne('wid4');
+	}
+	if (
+		document.getElementById('usa').checked
+	) {
+		s(2);
+		sorts();
+		closeNav();
+		addOne('wid4');
+	}
+	if (
+		document.getElementById('brasil').checked
+	) {
+		s(3);
+		sorts();
+		closeNav();
+		addOne('wid4');
+	}
+})
