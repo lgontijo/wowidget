@@ -1,175 +1,175 @@
 <!DOCTYPE html>
 <html>
+  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Personal Dashboard</title>
+  </head>
 
   <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
 
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Personal Dashboard</title>
-	</head>
+  <body>
+    <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+    <div class="container">
+      <div class="preloader-background">
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left"><div class="circle"></div></div>
+            <div class="gap-patch"><div class="circle"></div></div>
+            <div class="circle-clipper right"><div class="circle"></div></div>
+          </div>
+
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left"><div class="circle"></div></div>
+            <div class="gap-patch"><div class="circle"></div></div>
+            <div class="circle-clipper right"><div class="circle"></div></div>
+          </div>
+
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left"><div class="circle"></div></div>
+            <div class="gap-patch"><div class="circle"></div></div>
+            <div class="circle-clipper right"><div class="circle"></div></div>
+          </div>
+
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left"><div class="circle"></div></div>
+            <div class="gap-patch"><div class="circle"></div></div>
+            <div class="circle-clipper right"><div class="circle"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Create Widget</h4>
+          <div class="input-field col s12">
+            <select id="which">
+              <option class="clikedAndGetVal" value="" disabled selected
+                >Please Choose Below</option
+              >
+              <option class="clikedAndGetVal" value="1">Spotify</option>
+              <option class="clikedAndGetVal" value="2">News</option>
+              <option class="clikedAndGetVal" value="3">Weather</option>
+              <option class="clikedAndGetVal" value="4">Bart</option>
+              <option class="clikedAndGetVal" value="5">Notes</option>
+            </select>
+            <label>Please select the widget</label>
+            <span id="create_widget"></span>
+          </div>
+          <div class="right-align">
+            <a id="next" class="waves-effect waves-light btn right-align"
+              >Next</a
+            >
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a
+            href="#!"
+            id="create"
+            class="modal-close waves-effect waves-green btn-flat"
+            >Create</a
+          >
+        </div>
+      </div>
+
+      <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+      <!-- Modal Structure -->
+      <div id="modal2" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Remove all</h4>
+          <p>Remove all</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+            >Create!</a
+          >
+        </div>
+      </div>
+
+      <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+      <!-- Modal Structure -->
+      <div id="modal3" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Restore all</h4>
+          <p>Restore all</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+            >Create!</a
+          >
+        </div>
+      </div>
+
+      <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+      <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red" id="menu">
+          <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+          <li>
+            <a class="btn-floating yellow darken-1 modal-trigger" href="#modal2"
+              ><i class="material-icons">delete_forever</i></a
+            >
+          </li>
+          <li>
+            <a class="btn-floating green modal-trigger" href="#modal3"
+              ><i class="material-icons">history</i></a
+            >
+          </li>
+          <li>
+            <a class="btn-floating blue modal-trigger" href="#modal1"
+              ><i class="material-icons">add</i></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+      <div class="container" id="id"></div>
+      <ul id="sortable"></ul>
+    </div>
+    <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+    <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.0.0.min.js"
+      integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/getWeather.js"></script>
+    <script src="js/getNews.js"></script>
+    <script src="js/getTransit.js"></script>
+
+    <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+  </body>
 
   <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
-	<body>
-	
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
-  		<div class='container'>
-			<div class="preloader-background">
-
-				<div class="preloader-wrapper big active">
-					<div class="spinner-layer spinner-blue">
-						<div class="circle-clipper left">
-							<div class="circle"></div>
-						</div>
-						<div class="gap-patch">
-							<div class="circle"></div>
-						</div>
-						<div class="circle-clipper right">
-							<div class="circle"></div>
-						</div>
-					</div>
-
-					<div class="spinner-layer spinner-red">
-						<div class="circle-clipper left">
-							<div class="circle"></div>
-						</div>
-						<div class="gap-patch">
-							<div class="circle"></div>
-						</div>
-						<div class="circle-clipper right">
-							<div class="circle"></div>
-						</div>
-					</div>
-
-					<div class="spinner-layer spinner-yellow">
-						<div class="circle-clipper left">
-							<div class="circle"></div>
-						</div>
-						<div class="gap-patch">
-							<div class="circle"></div>
-						</div>
-						<div class="circle-clipper right">
-							<div class="circle"></div>
-						</div>
-					</div>
-
-					<div class="spinner-layer spinner-green">
-						<div class="circle-clipper left">
-							<div class="circle"></div>
-						</div>
-						<div class="gap-patch">
-							<div class="circle"></div>
-						</div>
-						<div class="circle-clipper right">
-							<div class="circle"></div>
-						</div>
-					</div>
-
-				</div> 
-			</div>
-
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-	
-			<!-- Modal Structure -->
-			<div id="modal1" class="modal modal-fixed-footer">
-			<div class="modal-content">
-				<h4>Create Widget</h4>
-				<div class="input-field col s12">
-					<select id="which">
-					  <option class="clikedAndGetVal" value="" disabled selected>Please Choose Below</option>
-					  <option class="clikedAndGetVal" value="1">Spotify</option>
-					  <option class="clikedAndGetVal" value="2">News</option>
-					  <option class="clikedAndGetVal" value="3">Weather</option>
-					  <option class="clikedAndGetVal" value="4">Bart</option>
-					  <option class="clikedAndGetVal" value="5">Notes</option>
-					</select>
-					<label>Please select the widget</label>
-					<span id='create_widget'></span>
-				  </div>
-				  <div class='right-align'>
-						<a id="next" class="waves-effect waves-light btn right-align">Next</a>
-				  </div>
-			</div>
-			<div class="modal-footer">
-				<a href="#!" id="create" class="modal-close waves-effect waves-green btn-flat">Create</a>
-			</div>
-			</div>
-
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
-<!-- Modal Structure -->
-<div id="modal2" class="modal modal-fixed-footer">
-		<div class="modal-content">
-			<h4>Remove all</h4>
-			<p>Remove all</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Create!</a>
-		</div>
-		</div>
-
-		<!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
-<!-- Modal Structure -->
-<div id="modal3" class="modal modal-fixed-footer">
-		<div class="modal-content">
-			<h4>Restore all</h4>
-			<p>Restore all</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Create!</a>
-		</div>
-		</div>
-
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-		
-			<div class="fixed-action-btn">
-				<a class="btn-floating btn-large red" id="menu">
-					<i class="large material-icons">mode_edit</i>
-				</a>
-				<ul>
-					<li><a class="btn-floating yellow darken-1 modal-trigger"  href="#modal2"><i class="material-icons">delete_forever</i></a></li>
-					<li><a class="btn-floating green modal-trigger"  href="#modal3"><i class="material-icons">history</i></a></li>
-					<li><a class="btn-floating blue modal-trigger" href="#modal1"><i class="material-icons">add</i></a></li>
-				</ul>
-			</div>
-
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
-	<div class='container' id='id'></div>
-		<ul id="sortable">
-
-		</ul>
-	</div>
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
-
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
-
-		<script src="https://code.jquery.com/jquery-3.0.0.min.js"
-			integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
-			crossorigin="anonymous"></script>
-		<script
-			src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-			crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-		<script src='js/app.js'></script>
-		<script src='js/getWeather.js'></script>
-		<script src='js/getNews.js'></script>
-		<script src='js/getTransit.js'></script>
-
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
-	</body>
-	
-  <!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
-
 </html>
