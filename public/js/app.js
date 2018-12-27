@@ -1,4 +1,5 @@
 // Declaring all global variables.
+// teste lucas
 let bart_api_key;
 let news_api_key;
 let weather_api_id;
