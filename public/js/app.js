@@ -23,7 +23,7 @@ $(document).ready(() => {
 
 document.addEventListener('DOMContentLoaded',() => {
     var elems = document.querySelectorAll('.fixed-action-btn');
-    var instances = M.FloatingActionButton.init(elems, {
+    M.FloatingActionButton.init(elems, {
       direction: 'left'
     });
   });
@@ -60,35 +60,35 @@ saveNotes = () => {
 // The following 6 functions returns the widgets value. Either 1 or 0.
 getWidgetsValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', (r) => {
+  key.ref('state').on('value', (r) => {
     none = r.val();
     notesWidget = none.notes_value;
   });
 }
 getRemindersValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', (r) => {
+  key.ref('state').on('value', (r) => {
     none = r.val();
     remindersWidget = none.reminders_value;
   });
 }
 getSpotifyValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', (r) => {
+  key.ref('state').on('value', (r) => {
     none = r.val();
     spotifyWidget = none.spotify_value;
   });
 }
 getNewsValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', (r) => {
+  key.ref('state').on('value', (r) => {
     none = r.val();
     newsWidget = none.news_value;
   });
 }
 getWeatherValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', (r) => {
+  key.ref('state').on('value', (r) => {
     none = r.val();
     weatherWidget = none.weather_value;
 
@@ -96,7 +96,7 @@ getWeatherValue = () => {
 }
 getTransitValue = () => {
   const key = firebase.database();
-  let k = key.ref('state').on('value', (r) => {
+  key.ref('state').on('value', (r) => {
     none = r.val();
     transitWidget = none.transit_value;
   });
@@ -184,12 +184,10 @@ function addZero(listID){
 // Returns the stored user's input.
 getUserNotes = () => {
 	const key = firebase.database();
-
-	const n = key.ref('notes').on('value', (results) => {
+	key.ref('notes').on('value', (results) => {
 		let noted = results.val();
 		notas = noted.notes;
 	});
-	
 }
 
 // This function is responsible for the persistent state of the widgets. It checks the whether the widget value is 1 or 0, if the value is 1 then the widgets are displayed.
@@ -220,7 +218,7 @@ displaying = () => {
 // This returns the API key value from the database and assign them to some local variables. This function runs with a setTimeout in all of the other JS files.
 fire = () => {
   const key = firebase.database();
-  const bartKey = key.ref('api').on('value', (results) => {
+  key.ref('api').on('value', (results) => {
     allKeys = results.val();
     bart_api_key = allKeys.bart_api_key;
     news_api_key = allKeys.news_api_key;
@@ -229,16 +227,6 @@ fire = () => {
     getUserNotes();
   });
 };
-
-// This opens the side bar.
-openNav = () => {
-    $("#mySidenav").css("width", "200px")
-}
-
-// This function hides the side bar.
-closeNav = ()  => {
-    $("#mySidenav").css("width", "0")
-}
 
 // This removes the widget from the main view and updates the widgets value to 0.
 close = (xid, divid) => {
@@ -311,8 +299,7 @@ function w(){
   <li id='c1' class="ui-state-default">
     <div class="mydiv">
       <div class="mydivheader">Weather<span id='x3' class='x' href='#'>x</div>
-      <img id='w' src="css/set/${gif}">
-      <h3>${celsius}°C <span id='e'>${weatherDescription}</span></h3>
+      <h3 padding="60px">${celciusTemp.currentTemp}°C <span id='e'>${weatherDescription}</span></h3>
     </div>
   </li>
   `
@@ -335,7 +322,7 @@ function s(type){
   <li id='d1' class="ui-state-default">
     <div class="mydiv">
       <div class="mydivheader">Spotify<span id='x4' class='x' href='#'>x</div>
-      <iframe src="${url}" width="400" height="480" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      <iframe src="${url}" margin-top="60px" width="400" height="480" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
   </li>
   `
@@ -392,7 +379,6 @@ function r(){
 $('#news').on('click', function(){
   nw();
   sorts();
-  closeNav();
   update();
   addOne('wid2');
 });
@@ -400,7 +386,6 @@ $('#news').on('click', function(){
 $('#notes').on('click', function(){
   n();
   sorts();
-  closeNav();
   saveNotes();
   addOne('wid1');
 });
@@ -408,28 +393,24 @@ $('#notes').on('click', function(){
 $('#weather').on('click', function(){
   w();
   sorts();
-  closeNav();
   addOne('wid3');
 });
 
 $('#spotify').on('click', function(){
   s();
   sorts();
-  closeNav();
   addOne('wid4');
 });
 
 $('#transit').on('click', function(){
   t();
   sorts();
-  closeNav();
   addOne('wid6');
 });
 
 $('#reminders').on('click', function(){
   r();
   sorts();
-  closeNav();
   btn();
   addOne('wid5');
 });
@@ -440,7 +421,7 @@ $('#open').on('click', function(){
 
 $('.closebtn').on('click', function(element){
   element.preventDefault();
-  closeNav();
+  
 });
 
 $('#next').on('click', function(){
@@ -450,8 +431,9 @@ $('#next').on('click', function(){
 })
 
 function updateViewer(picked) {
+	let template;
 	if (picked == 1){
-		let template = `
+		template = `
 		<form action="#">
 		<p>
 		<label>
@@ -477,13 +459,31 @@ function updateViewer(picked) {
 	  	</form>
 		`;
 		$('#create_widget').append(template);
-		$('#next').css('display', 'none')
+		// $('#next').css('display', 'none')
 	}
-	 if (picked === 2){
-
+	 if (picked == 2){
+		
 	}
-	 if (picked === 3){
-
+	 if (picked == 3){
+		template =
+		`<form action="#">
+		<p>
+		<label>
+		  <input id="currentLocation" type="checkbox" />
+		  <span>Current Weather</span>
+		</label>
+	  </p>
+	  <p>
+	  <p>
+		<label>
+		  <input id="otherCity" type="checkbox" />
+		  <span>Pick your City</span>
+		</label>
+	  </p>
+	  	</form>
+		`;
+		$('#create_widget').append(template);
+		// $('#next').css('display', 'none')
 	}
 	 if (picked === 4){
 
@@ -494,32 +494,47 @@ function updateViewer(picked) {
 	if (picked === null) {
 		console.log("Something went wrong");
 	}
+	if(picked == "clear") {
+		console.log(
+			picked
+		)
+		template =
+		`<form action="#">
+	  	</form>
+		`;
+		$('#create_widget').append(template)
+
+	}
 }
 
 
 $('#create').on('click', () => {
 	if (
+		document.getElementById('currentLocation')
+	) {
+		w()
+		addOne('wid3');
+	}
+	if (
 		document.getElementById('global').checked
 	) {
 		s(1);
 		sorts();
-  		closeNav();
-  		addOne('wid4');
+		addOne('wid4');
 	}
 	if (
 		document.getElementById('usa').checked
 	) {
 		s(2);
 		sorts();
-		closeNav();
 		addOne('wid4');
 	}
 	if (
 		document.getElementById('brasil').checked
 	) {
+	updateViewer('clear')
 		s(3);
 		sorts();
-		closeNav();
 		addOne('wid4');
 	}
 })
