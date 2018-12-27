@@ -1,67 +1,69 @@
 .preloader-background {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
 
-	position: fixed;
-	z-index: 100;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;	
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 #sortable {
-	list-style-type: none;
-	margin-left: 180px;
-	width: 1300px;
-	height: 1300px;
-	margin: 0;
-	position: absolute;
-	top: 800px;
-	left: 50%;
-	margin-right: -50%;
-	transform: translate(-50%, -50%)
-  }
-	 #sortable li {
-	margin: 7px 7px 7px 0;
-	padding: 3px; float: left;
-	width: 400px; height: 400px;
-	font-size: 20px;
-	text-align: center;
-   }
-   .mydiv {
-	  position: absolute;
-	  z-index: 0;
-	  background-color: #f1f1f1;
-	  border: 1px solid #d3d3d3;
-	  text-align: center;
-	  width: 400px;
-	  height: 400px;
-	  overflow-y: scroll;
-	  background-color: white;
-	  border-radius: 5%;
-	  overflow-x: hidden;
-  }
-   .mydivheader {
-	  text-align: left;
-	  padding: 10px;
-	  cursor: move;
-	  z-index: 1;
-	  background-color: #333;
-	  color: #fff;
-	  max-width: 400px;
-	  max-height: 400px;
-	  /* position: fixed; */
-	  width: 100%;
-  }
- 
+  list-style-type: none;
+  margin-left: 180px;
+  width: 1300px;
+  height: 1300px;
+  margin: 0;
+  position: absolute;
+  top: 800px;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+#sortable li {
+  margin: 7px 7px 7px 0;
+  padding: 3px;
+  float: left;
+  width: 400px;
+  height: 400px;
+  font-size: 20px;
+  text-align: center;
+}
+.mydiv {
+  position: absolute;
+  z-index: 0;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+  width: 400px;
+  height: 400px;
+  overflow-y: scroll;
+  background-color: white;
+  border-radius: 5%;
+  overflow-x: hidden;
+}
+.mydivheader {
+  text-align: left;
+  padding: 10px;
+  cursor: move;
+  z-index: 1;
+  background-color: #333;
+  color: #fff;
+  max-width: 400px;
+  max-height: 400px;
+  /* position: fixed; */
+  width: 100%;
+}
+
 .x {
   cursor: pointer;
   float: right;
   margin-left: 20px;
 }
- .x:hover{
+.x:hover {
   color: red;
 }
